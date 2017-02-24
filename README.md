@@ -57,4 +57,6 @@ When implementing this program focus on quality and best practices. DO NOT RUSH!
 
 We've created a very basic skeleton application you can use as a basis to start from. Feel free to adapt and refactor it as you see fit but please note that we will be running more complicated commands files against your application with the command `ruby runner.rb test_file_path.txt`
 
+The skeleton can be found here: https://github.com/carwow/bitmap_editor
+
 Please submit a fully completed answer within the time allowed. Please provide source code and full GIT repository. Please commit often and with good commit messages. That will allow us to see how you've approached the problem. Don't worry about changing things around often
