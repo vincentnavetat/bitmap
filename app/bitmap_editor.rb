@@ -7,7 +7,7 @@ class BitmapEditor
       line = line.chomp
       case line
       when 'S'
-          puts "output image"
+          puts "There is no image"
       else
           puts 'unrecognised command :('
       end
