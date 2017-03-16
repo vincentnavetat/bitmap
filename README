@@ -1,0 +1,7 @@
+# Bitmap Editor
+
+## Example command
+
+```
+./bin/bitmap_editor examples/show-bitmap-contents.txt
+```
