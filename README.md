@@ -1,4 +1,7 @@
-#Bitmap editor
+# Bitmap editor
+
 ..
-#running
+
+# Running
+
 `>bin/bitmap_editor examples/show.txt`
