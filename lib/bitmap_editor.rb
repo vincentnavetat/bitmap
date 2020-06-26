@@ -25,12 +25,16 @@ class BitmapEditor
   def run_command(line)
     case line[0]
     when 'I'
-      @img = Bitmap.new(line[2].to_i, line[4].to_i)
+      run_init(line)
     when 'S'
       show_bitmap
     else
       puts 'Unrecognised command :('
     end
+  end
+
+  def run_init(line)
+    @img = Bitmap.new(line[2], line[4])
   end
 
   def show_bitmap
