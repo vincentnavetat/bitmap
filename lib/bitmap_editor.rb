@@ -36,6 +36,6 @@ class BitmapEditor
   def show_bitmap
     return puts 'There is no image' unless @img
 
-    @img.show
+    puts @img.render
   end
 end
