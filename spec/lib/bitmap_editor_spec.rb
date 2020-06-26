@@ -42,4 +42,20 @@ RSpec.describe BitmapEditor do
       end.to output(/The image was truncated because the size X given was larger than 250/).to_stdout
     end
   end
+
+  context 'using L command' do
+    it 'shows a white bitmap with one pixel of color As' do
+      expect do
+        BitmapEditor.new.run('examples/color_pixel.txt')
+      end.to output("OAO\nOOO\n").to_stdout
+    end
+  end
+
+  context 'using C command on a bitmap with a pixel of different color' do
+    it 'shows a white bitmap of 3 x 2' do
+      expect do
+        BitmapEditor.new.run('examples/clear.txt')
+      end.to output("OOO\nOOO\n").to_stdout
+    end
+  end
 end

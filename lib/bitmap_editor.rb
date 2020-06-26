@@ -35,6 +35,10 @@ class BitmapEditor
     case line[0]
     when 'I'
       run_init(line)
+    when 'C'
+      run_clear
+    when 'L'
+      run_color_pixel(line)
     when 'S'
       show_bitmap
     else
@@ -61,6 +65,20 @@ class BitmapEditor
     end
 
     size
+  end
+
+  def run_clear
+    @img.clear
+  end
+
+  def run_color_pixel(line)
+    args = line.split(' ')
+
+    x = args[1].to_i
+    y = args[2].to_i
+    color = args[3]
+
+    @img.color_pixel(x, y, color)
   end
 
   def show_bitmap
