@@ -1,5 +1,4 @@
 class BitmapEditor
-
   def run(file)
     return puts "please provide correct file" if file.nil? || !File.exists?(file)
 
