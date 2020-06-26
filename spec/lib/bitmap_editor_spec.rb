@@ -34,4 +34,12 @@ RSpec.describe BitmapEditor do
       end.to output("OOO\nOOO\n").to_stdout
     end
   end
+
+  context 'with bitmap bigger than 250 limits' do
+    it 'returns an error message indicating image is too big' do
+      expect do
+        BitmapEditor.new.run('examples/too_big.txt')
+      end.to output(/The image was truncated because the size X given was larger than 250/).to_stdout
+    end
+  end
 end
