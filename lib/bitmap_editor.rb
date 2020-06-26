@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 
+require_relative 'bitmap'
+
 # BitmapEditor generates a bitmap from a file containing recognised commands
 class BitmapEditor
   def run(file)
@@ -22,23 +24,18 @@ class BitmapEditor
 
   def run_command(line)
     case line[0]
-      when 'I'
-        init_bitmap(line[2].to_i, line[4].to_i)
-      when 'S'
-        show_bitmap()
-      else
-        puts 'Unrecognised command :('
-      end
-  end
-
-  def init_bitmap(size_x, size_w)
-    @bitmap = Array.new(size_w, "O" * size_x)
+    when 'I'
+      @img = Bitmap.new(line[2].to_i, line[4].to_i)
+    when 'S'
+      show_bitmap
+    else
+      puts 'Unrecognised command :('
+    end
   end
 
   def show_bitmap
-    return puts 'There is no image' unless @bitmap
-    @bitmap.each do |line|
-      puts line
-    end
+    return puts 'There is no image' unless @img
+
+    @img.show
   end
 end
