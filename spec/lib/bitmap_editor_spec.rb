@@ -4,10 +4,26 @@ require 'bitmap_editor'
 
 RSpec.describe BitmapEditor do
   context 'with wrong file path' do
-    it 'returns an error message' do
+    it 'returns an error message asking for a correct path' do
       expect do
         BitmapEditor.new.run('wrong/path/file.txt')
-      end.to output("please provide correct file\n").to_stdout
+      end.to output("Please provide correct file\n").to_stdout
+    end
+  end
+
+  context 'with empty file' do
+    it 'returns an error message indicating no command found' do
+      expect do
+        BitmapEditor.new.run('examples/empty.txt')
+      end.to output("No command found\n").to_stdout
+    end
+  end
+
+  context 'with file showing no initialised bitmaps' do
+    it 'returns an error message indicating no command found' do
+      expect do
+        BitmapEditor.new.run('examples/no_bitmap.txt')
+      end.to output("There is no image\n").to_stdout
     end
   end
 end
