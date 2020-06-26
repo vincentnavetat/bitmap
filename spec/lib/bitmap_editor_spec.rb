@@ -26,4 +26,12 @@ RSpec.describe BitmapEditor do
       end.to output("There is no image\n").to_stdout
     end
   end
+
+  context 'with file showing initial white bitmap' do
+    it 'shows a white bitmap of 3 x 2' do
+      expect do
+        BitmapEditor.new.run('examples/init.txt')
+      end.to output("OOO\nOOO\n").to_stdout
+    end
+  end
 end
