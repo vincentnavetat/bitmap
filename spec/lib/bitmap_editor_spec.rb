@@ -66,4 +66,12 @@ RSpec.describe BitmapEditor do
       end.to output(/Unrecognised command/).to_stdout
     end
   end
+
+  context 'file has all possible instructions' do
+    it 'shows bitmap as expected' do
+      expect do
+        BitmapEditor.new.run('examples/demo.txt')
+      end.to output("OOOOO\nOOZZZ\nAWOOO\nOWOOO\nOWOOO\nOWOOO\n").to_stdout
+    end
+  end
 end
