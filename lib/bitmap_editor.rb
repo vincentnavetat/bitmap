@@ -33,10 +33,11 @@ class BitmapEditor
 
   def commands
     {
-      'I': :run_init,
-      'C': :run_clear,
-      'L': :run_color_pixel,
-      'S': :show_bitmap
+      I: :run_init,
+      C: :run_clear,
+      L: :run_color_pixel,
+      V: :run_vertical_segment,
+      S: :show_bitmap
     }
   end
 
@@ -83,6 +84,17 @@ class BitmapEditor
     color = args[3]
 
     @img.color_pixel(x, y, color)
+  end
+
+  def run_vertical_segment(line)
+    args = line.split(' ')
+
+    x = args[1].to_i
+    y1 = args[2].to_i
+    y2 = args[3].to_i
+    color = args[4]
+
+    @img.vertical_segment(x, y1, y2, color)
   end
 
   def show_bitmap(_line)

@@ -11,7 +11,18 @@ class Bitmap
   end
 
   def color_pixel(pos_x, pos_y, color)
-    @bitmap[(pos_x - 1)][pos_y - 1] = color
+    # TODO: do not draw if pixel outside bitmap
+
+    @bitmap[pos_y - 1][pos_x - 1] = color
+  end
+
+  def vertical_segment(pos_x, pos_y1, pos_y2, color)
+    # TODO: do not draw if pixel outside bitmap
+    # TODO: what to do if segment is inverted?
+
+    (pos_y1..pos_y2).each do |y|
+      color_pixel(pos_x, y, color)
+    end
   end
 
   def render

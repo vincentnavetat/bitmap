@@ -47,7 +47,7 @@ RSpec.describe BitmapEditor do
     it 'shows a white bitmap with one pixel of color As' do
       expect do
         BitmapEditor.new.run('examples/color_pixel.txt')
-      end.to output("OAO\nOOO\n").to_stdout
+      end.to output("OOO\nAOO\n").to_stdout
     end
   end
 
