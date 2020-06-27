@@ -27,10 +27,17 @@ RSpec.describe Bitmap do
   end
 
   describe '#vertical_segment' do
-    context 'for a bitmap with white pixels' do
+    context 'for a vertical segmented (top to bottom)' do
       it 'renders a vertical segment of color X' do
         large_bitmap.vertical_segment(4, 2, 4, 'X')
         expect(large_bitmap.render).to eq("OOOOOO\nOOOXOO\nOOOXOO\nOOOXOO\nOOOOOO")
+      end
+    end
+
+    context 'for a vertical segmented inverted (bottom to top)' do
+      it 'renders a vertical segment of color X' do
+        large_bitmap.vertical_segment(3, 3, 1, 'X')
+        expect(large_bitmap.render).to eq("OOXOOO\nOOXOOO\nOOXOOO\nOOOOOO\nOOOOOO")
       end
     end
   end

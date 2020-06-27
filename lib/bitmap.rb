@@ -18,9 +18,10 @@ class Bitmap
 
   def vertical_segment(pos_x, pos_y1, pos_y2, color)
     # TODO: do not draw if pixel outside bitmap
-    # TODO: what to do if segment is inverted?
 
-    (pos_y1..pos_y2).each do |y|
+    segment = pos_y1 < pos_y2 ? (pos_y1..pos_y2) : (pos_y2..pos_y1)
+
+    segment.each do |y|
       color_pixel(pos_x, y, color)
     end
   end
