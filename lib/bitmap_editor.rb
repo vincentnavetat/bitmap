@@ -37,6 +37,7 @@ class BitmapEditor
       C: :run_clear,
       L: :run_color_pixel,
       V: :run_vertical_segment,
+      H: :run_horizontal_segment,
       S: :show_bitmap
     }
   end
@@ -95,6 +96,17 @@ class BitmapEditor
     color = args[4]
 
     @img.vertical_segment(x, y1, y2, color)
+  end
+
+  def run_horizontal_segment(line)
+    args = line.split(' ')
+
+    x1 = args[1].to_i
+    x2 = args[2].to_i
+    y = args[3].to_i
+    color = args[4]
+
+    @img.horizontal_segment(x1, x2, y, color)
   end
 
   def show_bitmap(_line)

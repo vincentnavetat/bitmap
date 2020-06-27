@@ -63,6 +63,29 @@ RSpec.describe Bitmap do
     end
   end
 
+  describe '#horizontal_segment' do
+    context 'for a horizontal segmented (left to right)' do
+      it 'renders a horizontal segment of color X' do
+        large_bitmap.horizontal_segment(2, 5, 4, 'X')
+        expect(large_bitmap.render).to eq("OOOOOO\nOOOOOO\nOOOOOO\nOXXXXO\nOOOOOO")
+      end
+    end
+
+    context 'for a horizontal segmented inverted (right to left)' do
+      it 'renders a horizontal segment of color X' do
+        large_bitmap.horizontal_segment(4, 2, 1, 'X')
+        expect(large_bitmap.render).to eq("OXXXOO\nOOOOOO\nOOOOOO\nOOOOOO\nOOOOOO")
+      end
+    end
+
+    context 'for a horizontal segmented going over the bitmap size' do
+      it 'renders a horizontal segment of color X until the limit' do
+        large_bitmap.horizontal_segment(5, 7, 5, 'X')
+        expect(large_bitmap.render).to eq("OOOOOO\nOOOOOO\nOOOOOO\nOOOOOO\nOOOOXX")
+      end
+    end
+  end
+
   describe '#render' do
     context 'for a bitmap with no size given' do
       it 'renders a white 1x1 bitmap' do
