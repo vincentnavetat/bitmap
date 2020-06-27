@@ -119,7 +119,7 @@ class BitmapEditor
     puts "\nWarnings:\n" if @warnings.any?
 
     @warnings.each do |warning|
-      puts "#{warning}\n"
+      puts " • #{warning}\n"
     end
   end
 end
