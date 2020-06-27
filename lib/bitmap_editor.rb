@@ -10,7 +10,6 @@ class BitmapEditor
 
   def run(file)
     return puts 'Please provide correct file' if file.nil? || !File.exist?(file)
-
     return puts 'No command found' if File.zero?(file)
 
     read_file(file)
@@ -23,6 +22,16 @@ class BitmapEditor
   MIN_SIZE = 1
   MAX_SIZE = 250
 
+  COMMANDS =
+    {
+      I: :run_init,
+      C: :run_clear,
+      L: :run_color_pixel,
+      V: :run_vertical_segment,
+      H: :run_horizontal_segment,
+      S: :show_bitmap
+    }.freeze
+
   def read_file(file)
     File.open(file).each do |line|
       line = line.chomp
@@ -31,22 +40,11 @@ class BitmapEditor
     end
   end
 
-  def commands
-    {
-      I: :run_init,
-      C: :run_clear,
-      L: :run_color_pixel,
-      V: :run_vertical_segment,
-      H: :run_horizontal_segment,
-      S: :show_bitmap
-    }
-  end
-
   def run_command(line)
     key = line[0].to_sym
 
-    if commands.key?(key)
-      send commands[key], line
+    if COMMANDS.key?(key)
+      send COMMANDS[key], line
     else
       @warnings << "Unrecognised command: #{line}"
     end
