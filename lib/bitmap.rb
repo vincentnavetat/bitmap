@@ -18,22 +18,24 @@ class Bitmap
   end
 
   def vertical_segment(pos_x, pos_y1, pos_y2, color)
-    segment_values = pos_y1 < pos_y2 ? (pos_y1..pos_y2) : (pos_y2..pos_y1)
-
-    segment_values.each do |y|
-      color_pixel(pos_x, y, color)
+    segment_values(pos_y1, pos_y2).each do |pos_y|
+      color_pixel(pos_x, pos_y, color)
     end
   end
 
   def horizontal_segment(pos_x1, pos_x2, pos_y, color)
-    segment_values = pos_x1 < pos_x2 ? (pos_x1..pos_x2) : (pos_x2..pos_x1)
-
-    segment_values.each do |x|
-      color_pixel(x, pos_y, color)
+    segment_values(pos_x1, pos_x2).each do |pos_x|
+      color_pixel(pos_x, pos_y, color)
     end
   end
 
   def render
     @bitmap.join("\n")
+  end
+
+  private
+
+  def segment_values(first, second)
+    first < second ? (first..second) : (second..first)
   end
 end
