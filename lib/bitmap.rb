@@ -11,17 +11,16 @@ class Bitmap
   end
 
   def color_pixel(pos_x, pos_y, color)
-    # TODO: do not draw if pixel outside bitmap
+    return if pos_y > @bitmap.length
+    return if pos_x > @bitmap.first.length
 
     @bitmap[pos_y - 1][pos_x - 1] = color
   end
 
   def vertical_segment(pos_x, pos_y1, pos_y2, color)
-    # TODO: do not draw if pixel outside bitmap
+    segment_values = pos_y1 < pos_y2 ? (pos_y1..pos_y2) : (pos_y2..pos_y1)
 
-    segment = pos_y1 < pos_y2 ? (pos_y1..pos_y2) : (pos_y2..pos_y1)
-
-    segment.each do |y|
+    segment_values.each do |y|
       color_pixel(pos_x, y, color)
     end
   end

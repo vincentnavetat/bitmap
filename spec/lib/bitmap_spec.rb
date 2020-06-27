@@ -14,6 +14,20 @@ RSpec.describe Bitmap do
         expect(bitmap.render).to eq("OOO\nOOW")
       end
     end
+
+    context 'for a pixel with a X coordinate outside the bitmap size' do
+      it 'doesn\'t color any pixel' do
+        bitmap.color_pixel(4, 2, 'W')
+        expect(bitmap.render).to eq("OOO\nOOO")
+      end
+    end
+
+    context 'for a pixel with a Y coordinate outside the bitmap size' do
+      it 'doesn\'t color any pixel' do
+        bitmap.color_pixel(3, 3, 'W')
+        expect(bitmap.render).to eq("OOO\nOOO")
+      end
+    end
   end
 
   describe '#clear' do
@@ -38,6 +52,13 @@ RSpec.describe Bitmap do
       it 'renders a vertical segment of color X' do
         large_bitmap.vertical_segment(3, 3, 1, 'X')
         expect(large_bitmap.render).to eq("OOXOOO\nOOXOOO\nOOXOOO\nOOOOOO\nOOOOOO")
+      end
+    end
+
+    context 'for a vertical segmented going over the bitmap size' do
+      it 'renders a vertical segment of color X until the limit' do
+        large_bitmap.vertical_segment(4, 2, 10, 'X')
+        expect(large_bitmap.render).to eq("OOOOOO\nOOOXOO\nOOOXOO\nOOOXOO\nOOOXOO")
       end
     end
   end
