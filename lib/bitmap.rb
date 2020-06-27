@@ -14,7 +14,7 @@ class Bitmap
     return if pos_y > @bitmap.length
     return if pos_x > @bitmap.first.length
 
-    @bitmap[pos_y - 1][pos_x - 1] = color
+    @bitmap[pos_y - 1][pos_x - 1] = color.upcase
   end
 
   def vertical_segment(pos_x, pos_y1, pos_y2, color)
