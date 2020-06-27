@@ -58,4 +58,12 @@ RSpec.describe BitmapEditor do
       end.to output("OOO\nOOO\n").to_stdout
     end
   end
+
+  context 'file has unknown command' do
+    it 'shows a warning that file has unknown command' do
+      expect do
+        BitmapEditor.new.run('examples/unknown_command.txt')
+      end.to output(/Unrecognised command/).to_stdout
+    end
+  end
 end

@@ -31,16 +31,20 @@ class BitmapEditor
     end
   end
 
+  def commands
+    {
+      'I': :run_init,
+      'C': :run_clear,
+      'L': :run_color_pixel,
+      'S': :show_bitmap
+    }
+  end
+
   def run_command(line)
-    case line[0]
-    when 'I'
-      run_init(line)
-    when 'C'
-      run_clear
-    when 'L'
-      run_color_pixel(line)
-    when 'S'
-      show_bitmap
+    key = line[0].to_sym
+
+    if commands.key?(key)
+      send commands[key], line
     else
       @warnings << "Unrecognised command: #{line}"
     end
@@ -67,7 +71,7 @@ class BitmapEditor
     size
   end
 
-  def run_clear
+  def run_clear(_line)
     @img.clear
   end
 
@@ -81,7 +85,7 @@ class BitmapEditor
     @img.color_pixel(x, y, color)
   end
 
-  def show_bitmap
+  def show_bitmap(_line)
     return puts 'There is no image' unless @img
 
     puts @img.render
