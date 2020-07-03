@@ -6,13 +6,13 @@ class BitmapEditor
     @warnings = []
   end
 
-  def run(file)
+  def run(file, options)
     return puts 'Please provide correct file' if file.nil? || !File.exist?(file)
     return puts 'No command found' if File.zero?(file)
 
     read_file(file)
 
-    show_warnings
+    show_warnings if show_warnings?(options)
   end
 
   private
@@ -117,5 +117,9 @@ class BitmapEditor
     @warnings.each do |warning|
       puts " • #{warning}\n"
     end
+  end
+
+  def show_warnings?(options)
+    /--show-warnings/.match?(options)
   end
 end

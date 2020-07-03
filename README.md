@@ -1,6 +1,8 @@
 # Bitmap editor
 
-..
+## Options
+
+'--show-warnings` outputs warnings, for commands which may result in undesired effects
 
 # Running
 
