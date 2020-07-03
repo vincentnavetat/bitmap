@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 # Bitmap is a pixelated image where each pixel is represented by a character
 class Bitmap
   def initialize(size_x = 1, size_y = 1)

@@ -1,5 +1,3 @@
-# frozen_string_literal: true
-
 require 'bitmap'
 
 RSpec.describe Bitmap do
