@@ -12,7 +12,7 @@ RSpec.describe BitmapEditor do
   context 'with empty file' do
     it 'returns an error message indicating no command found' do
       expect do
-        BitmapEditor.new.run('examples/empty.txt')
+        BitmapEditor.new.run('spec/fixtures/empty.txt')
       end.to output("No command found\n").to_stdout
     end
   end
@@ -20,7 +20,7 @@ RSpec.describe BitmapEditor do
   context 'with file showing no initialised bitmaps' do
     it 'returns an error message indicating no command found' do
       expect do
-        BitmapEditor.new.run('examples/no_bitmap.txt')
+        BitmapEditor.new.run('spec/fixtures/no_bitmap.txt')
       end.to output("There is no image\n").to_stdout
     end
   end
@@ -28,7 +28,7 @@ RSpec.describe BitmapEditor do
   context 'with file showing initial white bitmap' do
     it 'shows a white bitmap of 3 x 2' do
       expect do
-        BitmapEditor.new.run('examples/init.txt')
+        BitmapEditor.new.run('spec/fixtures/init.txt')
       end.to output("OOO\nOOO\n").to_stdout
     end
   end
@@ -36,7 +36,7 @@ RSpec.describe BitmapEditor do
   context 'with bitmap bigger than 250 limits' do
     it 'returns an error message indicating image is too big' do
       expect do
-        BitmapEditor.new.run('examples/too_big.txt')
+        BitmapEditor.new.run('spec/fixtures/too_big.txt')
       end.to output(/The image was truncated because the size X given was larger than 250/).to_stdout
     end
   end
@@ -44,7 +44,7 @@ RSpec.describe BitmapEditor do
   context 'using L command' do
     it 'shows a white bitmap with one pixel of color As' do
       expect do
-        BitmapEditor.new.run('examples/color_pixel.txt')
+        BitmapEditor.new.run('spec/fixtures/color_pixel.txt')
       end.to output("OOO\nAOO\n").to_stdout
     end
   end
@@ -52,7 +52,7 @@ RSpec.describe BitmapEditor do
   context 'using C command on a bitmap with a pixel of different color' do
     it 'shows a white bitmap of 3 x 2' do
       expect do
-        BitmapEditor.new.run('examples/clear.txt')
+        BitmapEditor.new.run('spec/fixtures/clear.txt')
       end.to output("OOO\nOOO\n").to_stdout
     end
   end
@@ -60,7 +60,7 @@ RSpec.describe BitmapEditor do
   context 'file has unknown command' do
     it 'shows a warning that file has unknown command' do
       expect do
-        BitmapEditor.new.run('examples/unknown_command.txt')
+        BitmapEditor.new.run('spec/fixtures/unknown_command.txt')
       end.to output(/Unrecognised command/).to_stdout
     end
   end
@@ -68,7 +68,7 @@ RSpec.describe BitmapEditor do
   context 'file has all possible instructions' do
     it 'shows bitmap as expected' do
       expect do
-        BitmapEditor.new.run('examples/demo.txt')
+        BitmapEditor.new.run('spec/fixtures/demo.txt')
       end.to output("OOOOO\nOOZZZ\nAWOOO\nOWOOO\nOWOOO\nOWOOO\n").to_stdout
     end
   end
