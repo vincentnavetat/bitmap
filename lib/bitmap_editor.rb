@@ -1,6 +1,5 @@
 require_relative 'bitmap'
 
-# BitmapEditor generates a bitmap from a file containing recognised commands
 class BitmapEditor
   def initialize
     @warnings = []
