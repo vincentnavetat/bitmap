@@ -6,7 +6,7 @@ class BitmapEditor
     @warnings = []
   end
 
-  def run(file, options)
+  def run(file, options = '')
     return puts 'Please provide correct file' if file.nil? || !File.exist?(file)
     return puts 'No command found' if File.zero?(file)
 
@@ -22,11 +22,11 @@ class BitmapEditor
 
   COMMANDS =
     {
-      I: :run_init,
-      C: :run_clear,
-      L: :run_color_pixel,
-      V: :run_vertical_segment,
-      H: :run_horizontal_segment,
+      I: :init,
+      C: :clear,
+      L: :color_pixel,
+      V: :vertical_segment,
+      H: :horizontal_segment,
       S: :show_bitmap
     }.freeze
 
@@ -48,7 +48,7 @@ class BitmapEditor
     end
   end
 
-  def run_init(line)
+  def init(line)
     args = line.split(' ')
 
     size_x = clean_size(args[1], 'X')
@@ -69,11 +69,11 @@ class BitmapEditor
     size
   end
 
-  def run_clear(_line)
+  def clear(_line)
     @img.clear
   end
 
-  def run_color_pixel(line)
+  def color_pixel(line)
     args = line.split(' ')
 
     x = args[1].to_i
@@ -83,7 +83,7 @@ class BitmapEditor
     @img.color_pixel(x, y, color)
   end
 
-  def run_vertical_segment(line)
+  def vertical_segment(line)
     args = line.split(' ')
 
     x = args[1].to_i
@@ -94,7 +94,7 @@ class BitmapEditor
     @img.vertical_segment(x, y1, y2, color)
   end
 
-  def run_horizontal_segment(line)
+  def horizontal_segment(line)
     args = line.split(' ')
 
     x1 = args[1].to_i

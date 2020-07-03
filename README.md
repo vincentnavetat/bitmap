@@ -2,7 +2,7 @@
 
 ## Options
 
-'--show-warnings` outputs warnings, for commands which may result in undesired effects
+'--show-warnings` outputs warnings, for commands which may result in undesired effects on the bitmap
 
 # Running
 

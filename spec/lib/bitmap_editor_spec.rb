@@ -5,7 +5,7 @@ RSpec.describe BitmapEditor do
     context 'with wrong file path' do
       it 'returns an error message asking for a correct path' do
         expect do
-          BitmapEditor.new.run('wrong/path/file.txt')
+          BitmapEditor.new.run('wrong/path/file.txt', '--show-warnings')
         end.to output("Please provide correct file\n").to_stdout
       end
     end
@@ -13,7 +13,7 @@ RSpec.describe BitmapEditor do
     context 'with empty file' do
       it 'returns an error message indicating no command found' do
         expect do
-          BitmapEditor.new.run('spec/fixtures/empty.txt')
+          BitmapEditor.new.run('spec/fixtures/empty.txt', '--show-warnings')
         end.to output("No command found\n").to_stdout
       end
     end
@@ -21,7 +21,7 @@ RSpec.describe BitmapEditor do
     context 'with file showing no initialised bitmaps' do
       it 'returns an error message indicating no command found' do
         expect do
-          BitmapEditor.new.run('spec/fixtures/no_bitmap.txt')
+          BitmapEditor.new.run('spec/fixtures/no_bitmap.txt', '--show-warnings')
         end.to output("There is no image\n").to_stdout
       end
     end
@@ -37,7 +37,7 @@ RSpec.describe BitmapEditor do
     context 'with bitmap bigger than 250 limits' do
       it 'returns an error message indicating image is too big' do
         expect do
-          BitmapEditor.new.run('spec/fixtures/too_big.txt')
+          BitmapEditor.new.run('spec/fixtures/too_big.txt', '--show-warnings')
         end.to output(/The image was truncated because the size X given was larger than 250/).to_stdout
       end
     end
@@ -61,7 +61,7 @@ RSpec.describe BitmapEditor do
     context 'file has unknown command' do
       it 'shows a warning that file has unknown command' do
         expect do
-          BitmapEditor.new.run('spec/fixtures/unknown_command.txt')
+          BitmapEditor.new.run('spec/fixtures/unknown_command.txt', '--show-warnings')
         end.to output(/Unrecognised command/).to_stdout
       end
     end
