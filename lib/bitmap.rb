@@ -1,10 +1,10 @@
 class Bitmap
   def initialize(size_x = 1, size_y = 1)
-    @bitmap = Array.new(size_y) { 'O' * size_x }
+    @bitmap = Array.new(size_y) { WHITE * size_x }
   end
 
   def clear
-    @bitmap.map! { |row| 'O' * row.length }
+    @bitmap.map! { |row| WHITE * row.length }
   end
 
   def color_pixel(pos_x, pos_y, color)
@@ -31,6 +31,8 @@ class Bitmap
   end
 
   private
+
+  WHITE = 'O'.freeze
 
   def segment_values(first, second)
     first < second ? (first..second) : (second..first)
