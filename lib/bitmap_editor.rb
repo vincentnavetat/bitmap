@@ -1,6 +1,8 @@
 require_relative 'bitmap'
 
 class BitmapEditor
+  attr_reader :bitmap
+
   def initialize
     @warnings = []
   end

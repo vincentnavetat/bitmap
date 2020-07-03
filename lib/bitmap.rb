@@ -1,17 +1,22 @@
 class Bitmap
-  def initialize(size_x = 1, size_y = 1)
-    @bitmap = Array.new(size_y) { WHITE * size_x }
+  attr_reader :pixels, :width, :height
+
+  def initialize(width = 1, height = 1)
+    @width = width.to_i
+    @height = height.to_i
+    @pixels = Array.new(@height)
+    clear
   end
 
   def clear
-    @bitmap.map! { |row| WHITE * row.length }
+    @pixels.map! { |_row| WHITE * @width }
   end
 
   def color_pixel(pos_x, pos_y, color)
-    return if pos_y > @bitmap.length
-    return if pos_x > @bitmap.first.length
+    return if pos_y > @pixels.length
+    return if pos_x > @pixels.first.length
 
-    @bitmap[pos_y - 1][pos_x - 1] = color.upcase
+    @pixels[pos_y - 1][pos_x - 1] = color.upcase
   end
 
   def vertical_segment(pos_x, pos_y1, pos_y2, color)
@@ -27,7 +32,7 @@ class Bitmap
   end
 
   def render
-    @bitmap.join("\n")
+    @pixels.join("\n")
   end
 
   private
