@@ -55,7 +55,7 @@ class BitmapEditor
     size_x = clean_size(args[1], 'X')
     size_y = clean_size(args[2], 'Y')
 
-    @img = Bitmap.new(size_x, size_y)
+    @bitmap = Bitmap.new(size_x, size_y)
   end
 
   def clean_size(size, name)
@@ -71,7 +71,7 @@ class BitmapEditor
   end
 
   def clear(_line)
-    @img.clear
+    @bitmap.clear
   end
 
   def valid_params(line, format)
@@ -86,25 +86,25 @@ class BitmapEditor
   def color_pixel(line)
     params = valid_params(line, /L (\d+) (\d+) ([A-Z])/)
 
-    @img.color_pixel(params[0].to_i, params[1].to_i, params[2]) if params
+    @bitmap.color_pixel(params[0].to_i, params[1].to_i, params[2]) if params
   end
 
   def vertical_segment(line)
     params = valid_params(line, /V (\d+) (\d+) (\d+) ([A-Z])/)
 
-    @img.vertical_segment(params[0].to_i, params[1].to_i, params[2].to_i, params[3]) if params
+    @bitmap.vertical_segment(params[0].to_i, params[1].to_i, params[2].to_i, params[3]) if params
   end
 
   def horizontal_segment(line)
     params = valid_params(line, /H (\d+) (\d+) (\d+) ([A-Z])/)
 
-    @img.horizontal_segment(params[0].to_i, params[1].to_i, params[2].to_i, params[3]) if params
+    @bitmap.horizontal_segment(params[0].to_i, params[1].to_i, params[2].to_i, params[3]) if params
   end
 
   def show_bitmap(_line)
-    return puts 'There is no image' unless @img
+    return puts 'There is no image' unless @bitmap
 
-    puts @img.render
+    puts @bitmap.render
   end
 
   def show_warnings

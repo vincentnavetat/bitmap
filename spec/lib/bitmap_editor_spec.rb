@@ -35,7 +35,13 @@ RSpec.describe BitmapEditor do
     end
 
     context 'with bitmap bigger than 250 limits' do
-      # TODO: test that the image has been truncated
+      it 'has an image of 250x250' do
+        editor = BitmapEditor.new
+        editor.run('spec/fixtures/too_big.txt')
+        expect(editor.bitmap.width).to eq(250)
+        expect(editor.bitmap.height).to eq(250)
+      end
+
       it 'shows a warning indicating image has been truncated' do
         expect do
           BitmapEditor.new.run('spec/fixtures/too_big.txt', '--show-warnings')
