@@ -32,6 +32,13 @@ RSpec.describe BitmapEditor do
           BitmapEditor.new.run('spec/fixtures/init.txt')
         end.to output("OOO\nOOO\n").to_stdout
       end
+
+      it 'has an image of the right size' do
+        editor = BitmapEditor.new
+        editor.run('spec/fixtures/init.txt')
+        expect(editor.bitmap.width).to eq(3)
+        expect(editor.bitmap.height).to eq(2)
+      end
     end
 
     context 'with bitmap bigger than 250 limits' do
