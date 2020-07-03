@@ -5,6 +5,12 @@ RSpec.describe Bitmap do
   let(:bitmap) { Bitmap.new(3, 2) }
   let(:large_bitmap) { Bitmap.new(6, 5) }
 
+  describe '#initialize' do
+    it 'sets the bitmap with the width and height and all pixels to white' do
+      expect(bitmap.render).to eq("OOO\nOOO")
+    end
+  end
+
   describe '#color_pixel' do
     context 'for a bitmap with white pixels' do
       it 'colors the selected pixel' do
