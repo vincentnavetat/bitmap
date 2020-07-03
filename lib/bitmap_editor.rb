@@ -72,36 +72,31 @@ class BitmapEditor
     @img.clear
   end
 
+  def valid_params(line, format)
+    unless format.match? line
+      @warnings << "This command was ignored because of invalid parameters: #{line}"
+      return
+    end
+
+    line.scan(format).first
+  end
+
   def color_pixel(line)
-    args = line.split(' ')
+    params = valid_params(line, /L (\d+) (\d+) ([A-Z])/)
 
-    x = args[1].to_i
-    y = args[2].to_i
-    color = args[3]
-
-    @img.color_pixel(x, y, color)
+    @img.color_pixel(params[0].to_i, params[1].to_i, params[2]) if params
   end
 
   def vertical_segment(line)
-    args = line.split(' ')
+    params = valid_params(line, /V (\d+) (\d+) (\d+) ([A-Z])/)
 
-    x = args[1].to_i
-    y1 = args[2].to_i
-    y2 = args[3].to_i
-    color = args[4]
-
-    @img.vertical_segment(x, y1, y2, color)
+    @img.vertical_segment(params[0].to_i, params[1].to_i, params[2].to_i, params[3]) if params
   end
 
   def horizontal_segment(line)
-    args = line.split(' ')
+    params = valid_params(line, /H (\d+) (\d+) (\d+) ([A-Z])/)
 
-    x1 = args[1].to_i
-    x2 = args[2].to_i
-    y = args[3].to_i
-    color = args[4]
-
-    @img.horizontal_segment(x1, x2, y, color)
+    @img.horizontal_segment(params[0].to_i, params[1].to_i, params[2].to_i, params[3]) if params
   end
 
   def show_bitmap(_line)

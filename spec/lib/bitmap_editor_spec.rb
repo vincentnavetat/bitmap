@@ -43,6 +43,14 @@ RSpec.describe BitmapEditor do
       end
     end
 
+    context 'using commands with wrong arguments' do
+      it 'shows appropriate warnings' do
+        expect do
+          BitmapEditor.new.run('spec/fixtures/wrong_arguments.txt', '--show-warnings')
+        end.to output(/This command was ignored because of invalid parameters/).to_stdout
+      end
+    end
+
     context 'using L command' do
       it 'shows a white bitmap with one pixel of color As' do
         expect do
