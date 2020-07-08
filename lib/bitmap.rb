@@ -60,22 +60,18 @@ class Bitmap
     first < second ? (first..second) : (second..first)
   end
 
-  def matching_pixel(pos_x, pos_y, matching_color)
-    [pos_x, pos_y] if pixel_color(pos_x, pos_y) == matching_color
-  end
-
   def add_matching_neighboring_pixels(matching_pixels, pixel, matching_color)
     # up
-    matching_pixels << matching_pixel(pixel[0], pixel[1] - 1, matching_color)
+    matching_pixels << [pixel[0], pixel[1] - 1] if pixel_color(pixel[0], pixel[1] - 1) == matching_color
 
     # right
-    matching_pixels << matching_pixel(pixel[0] + 1, pixel[1], matching_color)
+    matching_pixels << [pixel[0] + 1, pixel[1]] if pixel_color(pixel[0] + 1, pixel[1]) == matching_color
 
     # bottom
-    matching_pixels << matching_pixel(pixel[0], pixel[1] + 1, matching_color)
+    matching_pixels << [pixel[0], pixel[1] + 1] if pixel_color(pixel[0], pixel[1] + 1) == matching_color
 
     # left
-    matching_pixels << matching_pixel(pixel[0] - 1, pixel[1], matching_color)
+    matching_pixels << [pixel[0] - 1, pixel[1]] if pixel_color(pixel[0] - 1, pixel[1]) == matching_color
 
     matching_pixels.uniq
   end
