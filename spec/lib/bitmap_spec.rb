@@ -92,6 +92,20 @@ RSpec.describe Bitmap do
     end
   end
 
+  describe '#fill' do
+    context 'for a bitmap with a square of colour A' do
+      it 'fills all the pixels A with the color B' do
+        large_bitmap.color_pixel(2, 2, 'A')
+        large_bitmap.color_pixel(3, 2, 'A')
+        large_bitmap.color_pixel(2, 3, 'A')
+        large_bitmap.color_pixel(3, 3, 'A')
+        large_bitmap.fill(2, 3, 'B')
+
+        expect(large_bitmap.render).to eq("OOOOOO\nOBBOOO\nOBBOOO\nOOOOOO\nOOOOOO")
+      end
+    end
+  end
+
   describe '#render' do
     context 'for a bitmap with no size given' do
       it 'renders a white 1x1 bitmap' do
