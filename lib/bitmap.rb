@@ -12,7 +12,7 @@ class Bitmap
     @pixels.map! { |_row| WHITE * @width }
   end
 
-  def color_pixel(pos_x, pos_y, color)
+  def paint_pixel(pos_x, pos_y, color)
     return if pos_y > @pixels.length
     return if pos_x > @pixels.first.length
 
@@ -21,27 +21,26 @@ class Bitmap
 
   def vertical_segment(pos_x, pos_y1, pos_y2, color)
     segment_values(pos_y1, pos_y2).each do |pos_y|
-      color_pixel(pos_x, pos_y, color)
+      paint_pixel(pos_x, pos_y, color)
     end
   end
 
   def horizontal_segment(pos_x1, pos_x2, pos_y, color)
     segment_values(pos_x1, pos_x2).each do |pos_x|
-      color_pixel(pos_x, pos_y, color)
+      paint_pixel(pos_x, pos_y, color)
     end
   end
-
 
   def fill(pos_x, pos_y, color)
     matching_color = pixel_color(pos_x, pos_y)
     pixels_to_fill = [[pos_x, pos_y]]
 
-    while pixels_to_fill.length > 0 do
-      fill_now = pixels_to_fill.shift
+    until pixels_to_fill.empty?
+      pixel = pixels_to_fill.shift
 
-      color_pixel(fill_now[0], fill_now[1], color)
+      paint_pixel(pixel[0], pixel[1], color)
 
-      pixels_to_fill = add_neighboor_pixels(pixels_to_fill, fill_now, matching_color)
+      pixels_to_fill = add_matching_neighboring_pixels(pixels_to_fill, pixel, matching_color)
     end
   end
 
@@ -53,27 +52,31 @@ class Bitmap
 
   WHITE = 'O'.freeze
 
+  def pixel_color(pos_x, pos_y)
+    @pixels[pos_y - 1][pos_x - 1]
+  end
+
   def segment_values(first, second)
     first < second ? (first..second) : (second..first)
   end
 
-  def pixel_color(pos_x, pos_y)
-    @pixels[pos_x - 1][pos_y - 1]
+  def matching_pixel(pos_x, pos_y, matching_color)
+    [pos_x, pos_y] if pixel_color(pos_x, pos_y) == matching_color
   end
 
-  def add_neighboor_pixels(pixel_array, fill_now, matching_color)
+  def add_matching_neighboring_pixels(matching_pixels, pixel, matching_color)
     # up
-    pixel_array << [fill_now[0], fill_now[1] - 1] if pixel_color(fill_now[0], fill_now[1] - 1) == matching_color
+    matching_pixels << matching_pixel(pixel[0], pixel[1] - 1, matching_color)
 
     # right
-    pixel_array << [fill_now[0] + 1, fill_now[1]] if pixel_color(fill_now[0] + 1, fill_now[1]) == matching_color
+    matching_pixels << matching_pixel(pixel[0] + 1, pixel[1], matching_color)
 
     # bottom
-    pixel_array << [fill_now[0], fill_now[1] + 1] if pixel_color(fill_now[0], fill_now[1] + 1) == matching_color
+    matching_pixels << matching_pixel(pixel[0], pixel[1] + 1, matching_color)
 
     # left
-    pixel_array << [fill_now[0] - 1, fill_now[1]] if pixel_color(fill_now[0] - 1, fill_now[1]) == matching_color
+    matching_pixels << matching_pixel(pixel[0] - 1, pixel[1], matching_color)
 
-    pixel_array
+    matching_pixels.uniq
   end
 end

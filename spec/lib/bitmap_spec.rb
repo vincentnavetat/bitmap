@@ -13,24 +13,24 @@ RSpec.describe Bitmap do
     end
   end
 
-  describe '#color_pixel' do
+  describe '#paint_pixel' do
     context 'for a bitmap with white pixels' do
       it 'colors the selected pixel' do
-        bitmap.color_pixel(3, 2, 'W')
+        bitmap.paint_pixel(3, 2, 'W')
         expect(bitmap.render).to eq("OOO\nOOW")
       end
     end
 
     context 'for a pixel with a X coordinate outside the bitmap size' do
       it 'doesn\'t color any pixel' do
-        bitmap.color_pixel(4, 2, 'W')
+        bitmap.paint_pixel(4, 2, 'W')
         expect(bitmap.render).to eq("OOO\nOOO")
       end
     end
 
     context 'for a pixel with a Y coordinate outside the bitmap size' do
       it 'doesn\'t color any pixel' do
-        bitmap.color_pixel(3, 3, 'W')
+        bitmap.paint_pixel(3, 3, 'W')
         expect(bitmap.render).to eq("OOO\nOOO")
       end
     end
@@ -39,7 +39,7 @@ RSpec.describe Bitmap do
   describe '#clear' do
     context 'for a white bitmap with one pixel of color W' do
       it 'renders a white 3x2 bitmap' do
-        bitmap.color_pixel(2, 2, 'W')
+        bitmap.paint_pixel(2, 2, 'W')
         bitmap.clear
         expect(bitmap.render).to eq("OOO\nOOO")
       end
@@ -95,10 +95,10 @@ RSpec.describe Bitmap do
   describe '#fill' do
     context 'for a bitmap with a square of colour A' do
       it 'fills all the pixels A with the color B' do
-        large_bitmap.color_pixel(2, 2, 'A')
-        large_bitmap.color_pixel(3, 2, 'A')
-        large_bitmap.color_pixel(2, 3, 'A')
-        large_bitmap.color_pixel(3, 3, 'A')
+        large_bitmap.paint_pixel(2, 2, 'A')
+        large_bitmap.paint_pixel(3, 2, 'A')
+        large_bitmap.paint_pixel(2, 3, 'A')
+        large_bitmap.paint_pixel(3, 3, 'A')
         large_bitmap.fill(2, 3, 'B')
 
         expect(large_bitmap.render).to eq("OOOOOO\nOBBOOO\nOBBOOO\nOOOOOO\nOOOOOO")

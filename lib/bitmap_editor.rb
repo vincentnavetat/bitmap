@@ -25,7 +25,7 @@ class BitmapEditor
     {
       I: :init,
       C: :clear,
-      L: :color_pixel,
+      L: :paint_pixel,
       V: :vertical_segment,
       H: :horizontal_segment,
       S: :show_bitmap
@@ -83,10 +83,10 @@ class BitmapEditor
     line.scan(format).first
   end
 
-  def color_pixel(line)
+  def paint_pixel(line)
     params = valid_params(line, /L (\d+) (\d+) ([A-Z])/)
 
-    @bitmap.color_pixel(params[0].to_i, params[1].to_i, params[2]) if params
+    @bitmap.paint_pixel(params[0].to_i, params[1].to_i, params[2]) if params
   end
 
   def vertical_segment(line)

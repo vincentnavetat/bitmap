@@ -67,7 +67,7 @@ RSpec.describe BitmapEditor do
     context 'using L command' do
       it 'shows a white bitmap with one pixel of color As' do
         expect do
-          BitmapEditor.new.run('spec/fixtures/color_pixel.txt')
+          BitmapEditor.new.run('spec/fixtures/paint_pixel.txt')
         end.to output("OOO\nAOO\n").to_stdout
       end
     end
