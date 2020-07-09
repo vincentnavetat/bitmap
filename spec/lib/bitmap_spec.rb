@@ -105,18 +105,18 @@ RSpec.describe Bitmap do
       end
     end
 
-    # context 'for a bitmap with a vertical line of A in the middle' do
-    #   it 'fills all the pixels O with the color A on one side of the image' do
-    #     large_bitmap.paint_pixel(3, 1, 'A')
-    #     large_bitmap.paint_pixel(3, 2, 'A')
-    #     large_bitmap.paint_pixel(3, 3, 'A')
-    #     large_bitmap.paint_pixel(3, 4, 'A')
-    #     large_bitmap.paint_pixel(3, 5, 'A')
-    #     large_bitmap.fill(5, 3, 'B')
+    context 'for a bitmap with a vertical line of A in the middle' do
+      it 'fills all the pixels O with the color A on one side of the image' do
+        large_bitmap.paint_pixel(3, 1, 'A')
+        large_bitmap.paint_pixel(3, 2, 'A')
+        large_bitmap.paint_pixel(3, 3, 'A')
+        large_bitmap.paint_pixel(3, 4, 'A')
+        large_bitmap.paint_pixel(3, 5, 'A')
+        large_bitmap.fill(5, 3, 'B')
 
-    #     expect(large_bitmap.render).to eq("OOABBB\nOOABBB\nOOABBB\nOOABBB\nOOABBB")
-    #   end
-    # end
+        expect(large_bitmap.render).to eq("OOABBB\nOOABBB\nOOABBB\nOOABBB\nOOABBB")
+      end
+    end
   end
 
   describe '#render' do
