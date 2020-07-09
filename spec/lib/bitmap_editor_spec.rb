@@ -95,5 +95,13 @@ RSpec.describe BitmapEditor do
         end.to output("OOOOO\nOOZZZ\nAWOOO\nOWOOO\nOWOOO\nOWOOO\n").to_stdout
       end
     end
+
+    context 'file with a fill instruction' do
+      it 'shows bitmap as expected' do
+        expect do
+          BitmapEditor.new.run('spec/fixtures/fill.txt')
+        end.to output("AAAAAAA\nAAAAAAA\nAAAAAAA\nAAAAAAA\n").to_stdout
+      end
+    end
   end
 end

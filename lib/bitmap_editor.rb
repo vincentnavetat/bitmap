@@ -28,6 +28,7 @@ class BitmapEditor
       L: :paint_pixel,
       V: :vertical_segment,
       H: :horizontal_segment,
+      F: :fill,
       S: :show_bitmap
     }.freeze
 
@@ -99,6 +100,12 @@ class BitmapEditor
     params = valid_params(line, /H (\d+) (\d+) (\d+) ([A-Z])/)
 
     @bitmap.horizontal_segment(params[0].to_i, params[1].to_i, params[2].to_i, params[3]) if params
+  end
+
+  def fill(line)
+    params = valid_params(line, /F (\d+) (\d+) ([A-Z])/)
+
+    @bitmap.fill(params[0].to_i, params[1].to_i, params[2]) if params
   end
 
   def show_bitmap(_line)
