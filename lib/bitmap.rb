@@ -12,28 +12,25 @@ class Bitmap
     @pixels.map! { |_row| WHITE * @width }
   end
 
-  def paint_pixel(pos_x, pos_y, color)
-    return if pos_y > @pixels.length
-    return if pos_x > @pixels.first.length
-
-    @pixels[pos_y - 1][pos_x - 1] = color.upcase
+  def paint_pixel(x, y, color)
+    @pixels[y - 1][x - 1] = color.upcase if pixel_exists(x, y)
   end
 
-  def vertical_segment(pos_x, pos_y1, pos_y2, color)
-    segment_values(pos_y1, pos_y2).each do |pos_y|
-      paint_pixel(pos_x, pos_y, color)
+  def vertical_segment(x, y1, y2, color)
+    segment_values(y1, y2).each do |y|
+      paint_pixel(x, y, color)
     end
   end
 
-  def horizontal_segment(pos_x1, pos_x2, pos_y, color)
-    segment_values(pos_x1, pos_x2).each do |pos_x|
-      paint_pixel(pos_x, pos_y, color)
+  def horizontal_segment(x1, x2, y, color)
+    segment_values(x1, x2).each do |x|
+      paint_pixel(x, y, color)
     end
   end
 
-  def fill(pos_x, pos_y, color)
-    matching_color = pixel_color(pos_x, pos_y)
-    pixels_to_fill = [[pos_x, pos_y]]
+  def fill(x, y, color)
+    matching_color = pixel_color(x, y)
+    pixels_to_fill = [[x, y]]
 
     until pixels_to_fill.empty?
       pixel = pixels_to_fill.shift
@@ -52,19 +49,24 @@ class Bitmap
 
   WHITE = 'O'.freeze
 
-  def pixel_color(pos_x, pos_y)
-    @pixels[pos_y - 1][pos_x - 1]
+  def pixel_exists(x, y)
+    x.positive? && x <= @width && y.positive? && y <= @height
+  end
+
+  def pixel_color(x, y)
+    @pixels[y - 1][x - 1]
+  end
+
+  def pixel_match(x, y, color)
+    pixel_exists(x, y) && pixel_color(x, y) == color
   end
 
   def segment_values(first, second)
     first < second ? (first..second) : (second..first)
   end
 
-  def add_matching_pixel(matching_pixels, pos_x, pos_y, matching_color)
-    return if pos_x > @width
-    return if pos_y > @height
-
-    matching_pixels << [pos_x, pos_y] if pixel_color(pos_x, pos_y) == matching_color
+  def add_matching_pixel(matching_pixels, x, y, matching_color)
+    matching_pixels << [x, y] if pixel_match(x, y, matching_color)
   end
 
   def add_matching_neighboring_pixels(matching_pixels, pixel, matching_color)
