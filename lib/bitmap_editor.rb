@@ -1,4 +1,5 @@
 require_relative 'bitmap'
+require_relative 'coords'
 
 class BitmapEditor
   attr_reader :bitmap
@@ -53,10 +54,17 @@ class BitmapEditor
   def init(line)
     args = line.split(' ')
 
-    size_x = clean_size(args[1], 'X')
-    size_y = clean_size(args[2], 'Y')
+    coords = Coords.new(args[1].to_i, args[2].to_i)
+    coords.clean_up(MIN_SIZE, MAX_SIZE)
 
-    @bitmap = Bitmap.new(size_x, size_y)
+    if coords.x < args[1].to_i
+      @warnings << "The image was truncated because the size X given was larger than #{MAX_SIZE}"
+    end
+    if coords.y < args[2].to_i
+      @warnings << "The image was truncated because the size Y given was larger than #{MAX_SIZE}"
+    end
+
+    @bitmap = Bitmap.new(coords.x, coords.y)
   end
 
   def clean_size(size, name)
