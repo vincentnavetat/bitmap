@@ -3,37 +3,39 @@ require 'bitmap_editor'
 RSpec.describe BitmapEditor do
   subject(:run) { described_class.new.run(path) }
 
+  shared_examples 'a valid stdout response' do
+    it 'returns the correct message given the path' do
+      expect { run }.to output(expected_text).to_stdout
+    end
+  end
+
   context '.run' do
     context 'with wrong file path' do
       let(:path) { 'wrong/path/file.txt' }
+      let(:expected_text) { "Please provide correct file\n" }
 
-      it 'returns an error message asking for a correct path' do
-        expect { run }.to output("Please provide correct file\n").to_stdout
-      end
+      it_behaves_like 'a valid stdout response'
     end
 
     context 'with empty file' do
       let(:path) { 'spec/fixtures/empty.txt' }
+      let(:expected_text) { "No command found\n" }
 
-      it 'returns an error message indicating no command found' do
-        expect { run }.to output("No command found\n").to_stdout
-      end
+      it_behaves_like 'a valid stdout response'
     end
 
     context 'with file showing no initialised bitmaps' do
       let(:path) { 'spec/fixtures/no_bitmap.txt' }
+      let(:expected_text) { "There is no image\n" }
 
-      it 'returns an error message indicating no command found' do
-        expect { run }.to output("There is no image\n").to_stdout
-      end
+      it_behaves_like 'a valid stdout response'
     end
 
     context 'with file showing initial white bitmap' do
       let(:path) { 'spec/fixtures/init.txt' }
+      let(:expected_text) { "OOO\nOOO\n" }
 
-      it 'shows a white bitmap of 3 x 2' do
-        expect { run }.to output("OOO\nOOO\n").to_stdout
-      end
+      it_behaves_like 'a valid stdout response'
 
       it 'has an image of the right size' do
         editor = BitmapEditor.new
@@ -68,18 +70,16 @@ RSpec.describe BitmapEditor do
 
     context 'using L command' do
       let(:path) { 'spec/fixtures/paint_pixel.txt' }
+      let(:expected_text) { "OOO\nAOO\n" }
 
-      it 'shows a white bitmap with one pixel of color As' do
-        expect { run }.to output("OOO\nAOO\n").to_stdout
-      end
+      it_behaves_like 'a valid stdout response'
     end
 
     context 'using C command on a bitmap with a pixel of different color' do
       let(:path) { 'spec/fixtures/clear.txt' }
+      let(:expected_text) { "OOO\nOOO\n" }
 
-      it 'shows a white bitmap of 3 x 2' do
-        expect { run }.to output("OOO\nOOO\n").to_stdout
-      end
+      it_behaves_like 'a valid stdout response'
     end
 
     context 'file has unknown command' do
@@ -92,18 +92,16 @@ RSpec.describe BitmapEditor do
 
     context 'file has all possible instructions' do
       let(:path) { 'spec/fixtures/demo.txt' }
+      let(:expected_text) { "OOOOO\nOOZZZ\nAWOOO\nOWOOO\nOWOOO\nOWOOO\n" }
 
-      it 'shows bitmap as expected' do
-        expect { run }.to output("OOOOO\nOOZZZ\nAWOOO\nOWOOO\nOWOOO\nOWOOO\n").to_stdout
-      end
+      it_behaves_like 'a valid stdout response'
     end
 
     context 'file with a fill instruction' do
       let(:path) { 'spec/fixtures/fill.txt' }
+      let(:expected_text) { "AAAAAAA\nAAAAAAA\nAAAAAAA\nAAAAAAA\n" }
 
-      it 'shows bitmap as expected' do
-        expect { run }.to output("AAAAAAA\nAAAAAAA\nAAAAAAA\nAAAAAAA\n").to_stdout
-      end
+      it_behaves_like 'a valid stdout response'
     end
   end
 end
