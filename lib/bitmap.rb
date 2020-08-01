@@ -4,16 +4,16 @@ class Bitmap
   def initialize(width = 1, height = 1)
     @width = width.to_i
     @height = height.to_i
-    @pixels = Array.new(@height)
+    @pixels = Array.new(height)
     clear
   end
 
   def clear
-    @pixels.map! { |_row| WHITE * @width }
+    pixels.map! { |_row| WHITE * width }
   end
 
   def paint_pixel(x, y, color)
-    @pixels[y - 1][x - 1] = color.upcase if pixel_exists(x, y)
+    pixels[y - 1][x - 1] = color.upcase if pixel_exists(x, y)
   end
 
   def vertical_segment(x, y1, y2, color)
@@ -42,7 +42,7 @@ class Bitmap
   end
 
   def render
-    @pixels.join("\n")
+    pixels.join("\n")
   end
 
   private
@@ -50,11 +50,11 @@ class Bitmap
   WHITE = 'O'.freeze
 
   def pixel_exists(x, y)
-    x.positive? && x <= @width && y.positive? && y <= @height
+    x.positive? && x <= width && y.positive? && y <= height
   end
 
   def pixel_color(x, y)
-    @pixels[y - 1][x - 1]
+    pixels[y - 1][x - 1]
   end
 
   def pixel_match(x, y, color)
