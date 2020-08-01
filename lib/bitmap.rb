@@ -3,8 +3,8 @@ require_relative 'coords'
 class Bitmap
   attr_reader :pixels, :size
 
-  def initialize(width = 1, height = 1)
-    @size = Coords.new(width, height)
+  def initialize(coords = Coords.new(1, 1))
+    @size = coords
     @pixels = Array.new(size.y)
     clear
   end

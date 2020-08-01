@@ -54,17 +54,20 @@ class BitmapEditor
   def init(line)
     args = line.split(' ')
 
-    coords = Coords.new(args[1].to_i, args[2].to_i)
+    width = args[1].to_i
+    height = args[2].to_i
+
+    coords = Coords.new(width, height)
     coords.clean_up(MIN_SIZE, MAX_SIZE)
 
-    if coords.x < args[1].to_i
-      @warnings << "The image was truncated because the size X given was larger than #{MAX_SIZE}"
-    end
-    if coords.y < args[2].to_i
-      @warnings << "The image was truncated because the size Y given was larger than #{MAX_SIZE}"
-    end
+    handle_truncation_warnings(coords, width, height)
 
-    @bitmap = Bitmap.new(coords.x, coords.y)
+    @bitmap = Bitmap.new(coords)
+  end
+
+  def handle_truncation_warnings(coords, width, height)
+    @warnings << "The image was truncated because the size X given was larger than #{MAX_SIZE}" if coords.x < width
+    @warnings << "The image was truncated because the size Y given was larger than #{MAX_SIZE}" if coords.y < height
   end
 
   def clean_size(size, name)

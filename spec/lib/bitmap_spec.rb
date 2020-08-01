@@ -2,8 +2,8 @@ require 'bitmap'
 
 RSpec.describe Bitmap do
   let(:empty_bitmap) { Bitmap.new }
-  let(:bitmap) { Bitmap.new(3, 2) }
-  let(:large_bitmap) { Bitmap.new(6, 5) }
+  let(:bitmap) { Bitmap.new(Coords.new(3, 2)) }
+  let(:large_bitmap) { Bitmap.new(Coords.new(6, 5)) }
 
   describe '#initialize' do
     it 'sets the bitmap with the width and height and all pixels to white' do
