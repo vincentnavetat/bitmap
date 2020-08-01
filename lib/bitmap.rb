@@ -57,7 +57,7 @@ class Bitmap
     pixels[y - 1][x - 1]
   end
 
-  def pixel_match(x, y, color)
+  def pixel_match?(x, y, color)
     pixel_exists?(x, y) && pixel_color(x, y) == color
   end
 
@@ -66,7 +66,7 @@ class Bitmap
   end
 
   def add_matching_pixel(matching_pixels, x, y, matching_color)
-    matching_pixels << [x, y] if pixel_match(x, y, matching_color)
+    matching_pixels << [x, y] if pixel_match?(x, y, matching_color)
   end
 
   def add_matching_neighboring_pixels(matching_pixels, pixel, matching_color)
