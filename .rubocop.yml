@@ -1,0 +1,9 @@
+Metrics/BlockLength:
+  Exclude:
+    - 'spec/**/*.rb'
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Documentation:
+  Enabled: false
+Naming/MethodParameterName:
+  Enabled: false
