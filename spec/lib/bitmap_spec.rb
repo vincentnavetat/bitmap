@@ -8,8 +8,8 @@ RSpec.describe Bitmap do
   describe '#initialize' do
     it 'sets the bitmap with the width and height and all pixels to white' do
       expect(bitmap.render).to eq("OOO\nOOO")
-      expect(bitmap.width).to eq(3)
-      expect(bitmap.height).to eq(2)
+      expect(bitmap.size.x).to eq(3)
+      expect(bitmap.size.y).to eq(2)
     end
   end
 

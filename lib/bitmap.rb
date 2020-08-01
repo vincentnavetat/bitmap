@@ -1,15 +1,18 @@
+require_relative 'coords'
+
 class Bitmap
-  attr_reader :pixels, :width, :height
+  attr_reader :pixels, :size
 
   def initialize(width = 1, height = 1)
-    @width = width.to_i
-    @height = height.to_i
-    @pixels = Array.new(height)
+    # @width = width.to_i
+    # @height = height.to_i
+    @size = Coords.new(width, height)
+    @pixels = Array.new(size.y)
     clear
   end
 
   def clear
-    pixels.map! { |_row| WHITE * width }
+    pixels.map! { |_row| WHITE * size.x }
   end
 
   def paint_pixel(x, y, color)
@@ -50,7 +53,7 @@ class Bitmap
   WHITE = 'O'.freeze
 
   def pixel_exists?(x, y)
-    x.positive? && x <= width && y.positive? && y <= height
+    x.positive? && x <= size.x && y.positive? && y <= size.y
   end
 
   def pixel_color(x, y)
