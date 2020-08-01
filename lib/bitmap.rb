@@ -62,7 +62,9 @@ class Bitmap
   end
 
   def segment_values(first, second)
-    first < second ? (first..second) : (second..first)
+    first, second = [first, second].sort
+
+    (first..second)
   end
 
   def add_matching_pixel(matching_pixels, x, y, matching_color)
