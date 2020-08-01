@@ -4,8 +4,6 @@ class Bitmap
   attr_reader :pixels, :size
 
   def initialize(width = 1, height = 1)
-    # @width = width.to_i
-    # @height = height.to_i
     @size = Coords.new(width, height)
     @pixels = Array.new(size.y)
     clear
