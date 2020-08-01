@@ -60,7 +60,7 @@ class BitmapEditor
   end
 
   def clean_size(size, name)
-    size = size.to_i < 1 ? MIN_SIZE : size.to_i
+    size = [size.to_i, MIN_SIZE].max
 
     if size > MAX_SIZE
       size = MAX_SIZE
