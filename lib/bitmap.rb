@@ -13,7 +13,7 @@ class Bitmap
   end
 
   def paint_pixel(x, y, color)
-    pixels[y - 1][x - 1] = color.upcase if pixel_exists(x, y)
+    pixels[y - 1][x - 1] = color.upcase if pixel_exists?(x, y)
   end
 
   def vertical_segment(x, y1, y2, color)
@@ -49,7 +49,7 @@ class Bitmap
 
   WHITE = 'O'.freeze
 
-  def pixel_exists(x, y)
+  def pixel_exists?(x, y)
     x.positive? && x <= width && y.positive? && y <= height
   end
 
@@ -58,7 +58,7 @@ class Bitmap
   end
 
   def pixel_match(x, y, color)
-    pixel_exists(x, y) && pixel_color(x, y) == color
+    pixel_exists?(x, y) && pixel_color(x, y) == color
   end
 
   def segment_values(first, second)
